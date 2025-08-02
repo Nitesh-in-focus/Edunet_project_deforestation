@@ -6,3 +6,4 @@ scikit-learn
 gdown
 Pillow
 matplotlib
+seaborn
