@@ -5,21 +5,32 @@ import joblib
 import os
 import gdown
 
-# Load model and scaler
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "best_fire_detection_model.pkl")
-GDRIVE_URL = "https://drive.google.com/file/d/1T7ea4xBu6pvx4fQpvuzY_Q50HYgBDEEY"
-# Download only if not exists
-if not os.path.exists(MODEL_PATH):
-    gdown.download(GDRIVE_URL, MODEL_PATH, quiet=False)
-# ✅ Check if file is legit
-with open(MODEL_PATH, "rb") as f:
-    magic = f.read(10)
-    if b"<html" in magic or b"<!DOCT" in magic:
-        raise ValueError("Downloaded file is not a valid model — looks like an HTML page 💩")
+# File 1 - Model
+MODEL_ID = "1T7ea4xBu6pvx4fQpvuzY_Q50HYgBDEEY"
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "../best_fire_detection_model.pkl")
+MODEL_URL = f"https://drive.google.com/uc?id={MODEL_ID}"
 
+# File 2 - Scaler
+SCALER_ID = "1Gz6GtIoSj_f09VyMewTOOb3Ci-RNQAIB"  # 🔁 Replace this with the actual file ID of your scaler
+SCALER_PATH = os.path.join(os.path.dirname(__file__), "..", "../scaler.pkl")
+SCALER_URL = f"https://drive.google.com/uc?id={SCALER_ID}"
 
+def download_and_verify(file_path, gdrive_url, name):
+    if not os.path.exists(file_path):
+        print(f"⬇️ Downloading {name}...")
+        gdown.download(gdrive_url, file_path, quiet=False)
+    with open(file_path, "rb") as f:
+        magic = f.read(20)
+        if b"<html" in magic or b"<!DOCT" in magic:
+            raise ValueError(f"Downloaded {name} is NOT valid — looks like an HTML page 💩")
+
+# 🔐 Secure downloads
+download_and_verify(MODEL_PATH, MODEL_URL, "Model")
+download_and_verify(SCALER_PATH, SCALER_URL, "Scaler")
+
+# ✅ Load after verified
 model = joblib.load(MODEL_PATH)
-scaler = joblib.load("scaler.pkl")
+scaler = joblib.load(SCALER_PATH)
 
 # --- Page Title ---
 st.markdown("<h2 style='color:#FF6B6B;'>🔥 Fire Type Prediction Tool</h2>", unsafe_allow_html=True)
@@ -86,6 +97,7 @@ st.markdown(
     "</div>",
     unsafe_allow_html=True
 )
+
 
 
 
