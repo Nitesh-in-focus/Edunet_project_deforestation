@@ -4,7 +4,7 @@ import numpy as np
 import joblib
 
 # Load model and scaler
-model = ("../best_fire_detection_model.pkl"
+model = ("../best_fire_detection_model.pkl")
 GDRIVE_URL = "https://drive.google.com/file/d/1T7ea4xBu6pvx4fQpvuzY_Q50HYgBDEEY"
 # Download only if not exists
 if not os.path.exists(model):
@@ -77,6 +77,7 @@ st.markdown(
     "</div>",
     unsafe_allow_html=True
 )
+
 
 
 
