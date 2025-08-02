@@ -2,16 +2,21 @@
 import streamlit as st
 import numpy as np
 import joblib
-import os
-import gdown
+import requests
 
-# Load model and scaler
-model = ("best_fire_detection_model.pkl")
-GDRIVE_URL = "https://drive.google.com/file/d/1T7ea4xBu6pvx4fQpvuzY_Q50HYgBDEEY"
-# Download only if not exists
-if not os.path.exists(model):
-    gdown.download(GDRIVE_URL, model, quiet=False)
-model = joblib.load(model)
+MODEL_URL = "https://huggingface.co/animedits765/fire-prediction-model/resolve/main/best_fire_detection_model.pkl"
+MODEL_PATH = "best_fire_detection_model.pkl"
+
+if not os.path.exists(MODEL_PATH):
+    print("Downloading model from Hugging Face...")
+    response = requests.get(MODEL_URL)
+    if response.status_code == 200:
+        with open(MODEL_PATH, 'wb') as f:
+            f.write(response.content)
+    else:
+        raise Exception("Model download failed! Status code: " + str(response.status_code))
+
+model = joblib.load(MODEL_PATH)
 scaler = joblib.load("../scaler.pkl")
 
 # --- Page Title ---
@@ -79,6 +84,7 @@ st.markdown(
     "</div>",
     unsafe_allow_html=True
 )
+
 
 
 
