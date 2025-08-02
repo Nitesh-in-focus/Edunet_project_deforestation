@@ -7,3 +7,5 @@ gdown
 Pillow
 matplotlib
 seaborn
+folium
+
