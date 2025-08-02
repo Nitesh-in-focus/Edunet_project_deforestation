@@ -5,7 +5,7 @@ import joblib
 
 # Load model and scaler
 model = joblib.load("best_fire_detection_model.pkl")
-GDRIVE_URL = "https://drive.google.com/file/d/1T7ea4xBu6pvx4fQpvuzY_Q50HYgBDEEY/view?usp=sharing"
+GDRIVE_URL = "https://drive.google.com/file/d/1T7ea4xBu6pvx4fQpvuzY_Q50HYgBDEEY"
 # Download only if not exists
 if not os.path.exists(model):
     gdown.download(GDRIVE_URL, model, quiet=False)
@@ -77,4 +77,5 @@ st.markdown(
     "</div>",
     unsafe_allow_html=True
 )
+
 
