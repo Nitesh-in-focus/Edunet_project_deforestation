@@ -3,6 +3,7 @@ import streamlit as st
 import numpy as np
 import joblib
 import requests
+import os
 
 MODEL_URL = "https://huggingface.co/animedits765/fire-prediction-model/resolve/main/best_fire_detection_model.pkl"
 MODEL_PATH = "best_fire_detection_model.pkl"
@@ -84,6 +85,7 @@ st.markdown(
     "</div>",
     unsafe_allow_html=True
 )
+
 
 
 
