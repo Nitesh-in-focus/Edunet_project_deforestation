@@ -18,7 +18,7 @@ if not os.path.exists(MODEL_PATH):
         raise Exception("Model download failed! Status code: " + str(response.status_code))
 
 model = joblib.load(MODEL_PATH)
-scaler = joblib.load("./scaler.pkl")
+scaler = joblib.load("../scaler.pkl")
 
 # --- Page Title ---
 st.markdown("<h2 style='color:#FF6B6B;'>🔥 Fire Type Prediction Tool</h2>", unsafe_allow_html=True)
@@ -85,6 +85,7 @@ st.markdown(
     "</div>",
     unsafe_allow_html=True
 )
+
 
 
 
