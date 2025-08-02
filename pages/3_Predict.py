@@ -6,12 +6,12 @@ import os
 import gdown
 
 # Load model and scaler
-model = ("../best_fire_detection_model.pkl")
+MODEL_PATH = ("../best_fire_detection_model.pkl")
 GDRIVE_URL = "https://drive.google.com/file/d/1T7ea4xBu6pvx4fQpvuzY_Q50HYgBDEEY"
 # Download only if not exists
-if not os.path.exists(model):
-    gdown.download(GDRIVE_URL, model, quiet=False)
-model = joblib.load(model)
+if not os.path.exists(MODEL_PATH):
+    gdown.download(GDRIVE_URL, MODEL_PATH, quiet=False)
+model = joblib.load(MODEL_PATH)
 scaler = joblib.load("scaler.pkl")
 
 # --- Page Title ---
@@ -79,6 +79,7 @@ st.markdown(
     "</div>",
     unsafe_allow_html=True
 )
+
 
 
 
