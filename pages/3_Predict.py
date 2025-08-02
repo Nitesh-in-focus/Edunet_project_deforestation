@@ -2,6 +2,7 @@
 import streamlit as st
 import numpy as np
 import joblib
+import os
 
 # Load model and scaler
 model = ("../best_fire_detection_model.pkl")
@@ -77,6 +78,7 @@ st.markdown(
     "</div>",
     unsafe_allow_html=True
 )
+
 
 
 
