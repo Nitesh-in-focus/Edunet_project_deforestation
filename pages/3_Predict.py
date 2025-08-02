@@ -5,20 +5,10 @@ import joblib
 import requests
 import os
 
-MODEL_URL = "https://huggingface.co/animedits765/fire-prediction-model/resolve/main/best_fire_detection_model.pkl"
-MODEL_PATH = "best_fire_detection_model.pkl"
+# Load model and scaler
+model = joblib.load("best_fire_detection_model.pkl")
+scaler = joblib.load("scaler.pkl")
 
-if not os.path.exists(MODEL_PATH):
-    print("Downloading model from Hugging Face...")
-    response = requests.get(MODEL_URL)
-    if response.status_code == 200:
-        with open(MODEL_PATH, 'wb') as f:
-            f.write(response.content)
-    else:
-        raise Exception("Model download failed! Status code: " + str(response.status_code))
-
-model = joblib.load(MODEL_PATH)
-scaler = joblib.load("../scaler.pkl")
 
 # --- Page Title ---
 st.markdown("<h2 style='color:#FF6B6B;'>🔥 Fire Type Prediction Tool</h2>", unsafe_allow_html=True)
@@ -85,6 +75,7 @@ st.markdown(
     "</div>",
     unsafe_allow_html=True
 )
+
 
 
 
