@@ -6,7 +6,7 @@ import os
 import gdown
 
 # Load model and scaler
-MODEL_PATH = ("../best_fire_detection_model.pkl")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "best_fire_detection_model.pkl")
 GDRIVE_URL = "https://drive.google.com/file/d/1T7ea4xBu6pvx4fQpvuzY_Q50HYgBDEEY"
 # Download only if not exists
 if not os.path.exists(MODEL_PATH):
@@ -79,6 +79,7 @@ st.markdown(
     "</div>",
     unsafe_allow_html=True
 )
+
 
 
 
